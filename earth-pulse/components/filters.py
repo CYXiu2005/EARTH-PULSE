@@ -32,13 +32,18 @@ def global_controls(df: pd.DataFrame, page: str) -> pd.DataFrame:
     if "applied_filters" not in st.session_state:
         st.session_state.applied_filters = base
     applied = st.session_state.applied_filters
-    # Page-specific draft keys avoid Streamlit discarding widget state on navigation.
+    # Streamlit removes widget keys when navigating away; restore drafts from
+    # the last applied filters whenever a page's widgets have disappeared.
     page = page.lower().replace(" ", "_")
     keys = {name: f"draft_{page}_{name}" for name in base}
     revision_key = f"revision_{page}"
-    if st.session_state.get(revision_key) != st.session_state.get("filter_revision", 0):
-        for name, key in keys.items():
-            st.session_state[key] = applied[name]
+    widget_keys = (keys["min_mag"], keys["max_mag"], keys["categories"],
+                   keys["start"] + "_range", keys["min_depth"] + "_range")
+    if (st.session_state.get(revision_key) != st.session_state.get("filter_revision", 0)
+            or any(key not in st.session_state for key in widget_keys)):
+        st.session_state[keys["min_mag"]] = applied["min_mag"]
+        st.session_state[keys["max_mag"]] = applied["max_mag"]
+        st.session_state[keys["categories"]] = applied["categories"]
         st.session_state[keys["start"] + "_range"] = (applied["start"], applied["end"])
         st.session_state[keys["min_depth"] + "_range"] = (applied["min_depth"], applied["max_depth"])
         st.session_state[revision_key] = st.session_state.get("filter_revision", 0)

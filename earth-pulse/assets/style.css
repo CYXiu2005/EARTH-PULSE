@@ -1,6 +1,17 @@
 :root { color-scheme: dark; }
 html, body, [data-testid="stAppViewContainer"], [data-testid="stHeader"] { background: #070D18; color: #E8F0F7; }
 [data-testid="stSidebar"] { background: #0D1725; border-right: 1px solid #213346; }
+[data-testid="stSidebar"], [data-testid="stSidebar"] [data-testid="stSidebarContent"] { color: #E8F0F7 !important; }
+[data-testid="stSidebarNav"] a, [data-testid="stSidebarNav"] a span,
+[data-testid="stSidebarNav"] p { color: #DCE6F1 !important; }
+[data-testid="stSidebarNav"] a:hover { background: #1B2D42 !important; }
+[data-testid="stSidebarNav"] a[aria-current="page"] { background: #253C56 !important; }
+[data-testid="stSidebar"] [data-testid="stWidgetLabel"] p,
+[data-testid="stSidebar"] label p,
+[data-testid="stSidebar"] [data-testid="stMarkdownContainer"] p,
+[data-testid="stAppViewContainer"] [data-testid="stWidgetLabel"] p,
+[data-testid="stAppViewContainer"] label p { color: #DCE6F1 !important; }
+[data-testid="stSidebar"] [data-testid="stCaptionContainer"] p { color: #A8B8C9 !important; }
 .block-container { max-width: 1600px; padding-top: 1.4rem; padding-bottom: 2rem; }
 .brand-header { display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid #253649; padding: .6rem 0 1.2rem; margin-bottom:2.2rem; }
 .brand-title { color:#E8F0F7; font-size:1.5rem; font-weight:800; letter-spacing:.19em; }
